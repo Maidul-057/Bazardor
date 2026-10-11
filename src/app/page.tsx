@@ -1,3 +1,5 @@
+import Image from "next/image";
+import heroImage from "@/assests/bazar-hero.png";
 import { getProducts } from "@/lib/api";
 import ProductCard, { Grid } from "@/components/ProductCard";
 import { getChange } from "@/lib/format";
@@ -12,20 +14,34 @@ const Section = ({ id, title, sub, children }: { id?: string; title: string; sub
 
 export default async function Home() {
   const all = await getProducts();
+  const today = new Intl.DateTimeFormat("bn-BD", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Dhaka",
+  }).format(new Date());
   const rank = (dir: string) =>
     all.filter((p) => getChange(p).dir === dir).sort((a, b) => getChange(b).pct - getChange(a).pct).slice(0, 6);
   return (
     <>
-      <section className="bg-gradient-to-br from-green-50 to-green-100">
-        <div className="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-center">
-          <div className="text-center md:text-left">
-            <p className="text-green-700 font-semibold">আজকের বাজার দর</p>
-            <h1 className="text-3xl sm:text-5xl font-bold mt-2 leading-tight">নিত্যপ্রয়োজনীয় পণ্যের দাম, এক নজরে</h1>
-            <p className="text-gray-600 mt-4">চাল, ডাল, তেল, সবজি, মাছ-মাংস — সারা দেশের বাজারের সর্বশেষ দাম ও ওঠানামা জানুন।</p>
-            <a href="#সব-পণ্য" className="btn btn-success text-white mt-6">সব পণ্যের দাম দেখুন ↓</a>
-          </div>
-          <div className="grid grid-cols-4 gap-3 text-4xl sm:text-5xl text-center bg-white/70 rounded-3xl p-6 shadow">
-            {["🍚", "🫘", "🫙", "🥔", "🧅", "🌶️", "🐟", "🍗", "🥚", "🫚", "🧄", "🍅"].map((e) => <span key={e}>{e}</span>)}
+      <section className="bg-[#f1f7f1] py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid w-full items-center gap-5 rounded-2xl border border-[#dce7de] bg-[#fbfdfb] p-5 sm:p-8 md:min-h-81 md:grid-cols-[1.35fr_0.65fr] md:px-8 md:py-8">
+            <div className="text-left">
+              <p className="inline-flex rounded-full bg-[#e3f2e8] px-3 py-1 text-sm font-semibold text-green-700">{today}</p>
+              <h1 className="mt-3 max-w-xl text-3xl font-bold leading-tight">আজকের বাজারের দাম এক নজরে</h1>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base">চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তৃত, গড়, সর্বনিম্ন-সর্বোচ্চ এবং দামের পরিবর্তন এক জায়গায়।</p>
+              <a href="#সব-পণ্য" className="btn btn-sm btn-success mt-5 text-white">সব পণ্য দেখুন</a>
+            </div>
+            <div className="mx-auto w-full max-w-60">
+              <Image
+                src={heroImage}
+                alt="রঙিন সবজিতে ভরা বাজারের ঝুড়ি"
+                priority
+                className="h-auto w-full object-contain"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { bn, getChange, unitBn } from "@/lib/format";
 
 export function ChangeBadge({ p }: { p: Product }) {
   const c = getChange(p);
-  const cls = c.dir === "up" ? "bg-green-100 text-green-700" : c.dir === "down" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-600";
+  const cls = c.dir === "up" ? "bg-red-100 text-red-700" : c.dir === "down" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600";
   const sym = c.dir === "up" ? "▲" : c.dir === "down" ? "▼" : "—";
   return <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${cls}`}>{sym} {bn(c.pct, 1)}%</span>;
 }
@@ -19,7 +19,7 @@ export default function ProductCard({ p }: { p: Product }) {
         <div className="mt-2 flex items-center justify-between border-t pt-2">
           <div>
             <div className="text-xs text-gray-400">আজকের দাম</div>
-            <div className="font-bold text-red-600">{bn(p.today)} টাকা</div>
+            <div className="font-bold text-gray-900">{bn(p.today)} টাকা</div>
           </div>
           <ChangeBadge p={p} />
         </div>
