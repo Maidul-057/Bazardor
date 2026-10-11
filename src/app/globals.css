@@ -5,4 +5,19 @@
 .marquee { display: flex; width: max-content; animation: marquee 45s linear infinite; }
 .marquee:hover { animation-play-state: paused; }
 html { scroll-behavior: smooth; }
-body { font-family: "Noto Sans Bengali", system-ui, sans-serif; }
+:root {
+	--page: #f1f7f1;
+	--surface: #fbfdfb;
+	--line: #dce7de;
+	--brand: #087d42;
+	--ink: #202923;
+}
+body { font-family: "Noto Sans Bengali", system-ui, sans-serif; background: var(--page); color: var(--ink); }
+.ticker-strip { background: var(--page); color: var(--ink); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.bg-white { background-color: var(--surface); }
+.card { border: 1px solid var(--line); box-shadow: 0 1px 3px rgb(28 54 37 / 6%); }
+header, footer { background-color: var(--surface); }
+.text-green-700 { color: var(--brand); }
+.btn-success:not(.btn-outline) { background-color: var(--brand); border-color: var(--brand); color: #fff; }
+.btn-outline.btn-success { background-color: transparent; border-color: var(--brand); color: var(--brand); }
+.link-success { color: var(--brand); }
