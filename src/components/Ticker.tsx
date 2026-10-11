@@ -5,11 +5,11 @@ export default function Ticker({ products }: { products: Product[] }) {
   if (!products.length) return null;
   const items = [...products, ...products];
   return (
-    <div className="bg-green-800 text-white overflow-hidden py-2 text-sm">
+    <div className="ticker-strip overflow-hidden py-2 text-sm">
       <div className="marquee">
         {items.map((p, i) => {
           const c = getChange(p);
-          const color = c.dir === "up" ? "text-green-300" : c.dir === "down" ? "text-red-300" : "text-gray-300";
+          const color = c.dir === "up" ? "text-red-700" : c.dir === "down" ? "text-green-700" : "text-gray-600";
           return (
             <span key={i} className="mx-5 whitespace-nowrap">
               {p.image} {p.nameBn} <b>{bn(p.today)} টাকা</b>/{unitBn(p.unit).replace("প্রতি ", "")}{" "}
